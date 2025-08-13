@@ -8,6 +8,7 @@ import Projects from './pages/Projects';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import StyleGuide from './pages/StyleGuide'; 
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/style-guide" element={<StyleGuide />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Container>
       <Footer />
