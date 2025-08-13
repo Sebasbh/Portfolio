@@ -100,57 +100,103 @@ const StyleGuide = () => {
 
       <Divider />
 
-      {/* Form controls */}
-      <Box>
-        <Typography variant="h3" gutterBottom>Form Controls</Typography>
-        <Grid container spacing={2}>
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Stack spacing={2}>
-              <TextField label="Name" placeholder="John Doe" />
-              <TextField label="Email" type="email" placeholder="john@mail.com" />
-              <TextField label="Message" multiline minRows={3} placeholder="Write something…" />
-              <FormControl>
-                <InputLabel id="sg-select-label">Role</InputLabel>
-                <Select labelId="sg-select-label" label="Role" defaultValue="dev">
-                  <MenuItem value="dev">Developer</MenuItem>
-                  <MenuItem value="designer">Designer</MenuItem>
-                  <MenuItem value="pm">Product Manager</MenuItem>
-                </Select>
-              </FormControl>
-              <FormControlLabel control={<Checkbox defaultChecked />} label="Subscribe to newsletter" />
-              <FormControlLabel control={<Switch defaultChecked />} label="Dark mode (mock)" />
-              <Box sx={{ px: 1 }}>
-                <Typography variant="body2" gutterBottom>Proficiency</Typography>
-                <Slider defaultValue={70} aria-label="Proficiency" />
-              </Box>
-            </Stack>
-          </Grid>
+    {/* Form controls */}
+    <Box>
+    <Typography variant="h3" gutterBottom>Form Controls</Typography>
+    <Grid container spacing={2}>
+        <Grid size={{ xs: 12, md: 6 }}>
+        <Stack spacing={2}>
+            {/* TextFields con id + name + autocomplete */}
+            <TextField
+            id="name"
+            name="name"
+            label="Name"
+            placeholder="John Doe"
+            autoComplete="name"
+            />
+            <TextField
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+            placeholder="john@mail.com"
+            autoComplete="email"
+            />
+            <TextField
+            id="message"
+            name="message"
+            label="Message"
+            multiline
+            minRows={3}
+            placeholder="Write something…"
+            autoComplete="off"
+            />
 
-          <Grid size={{ xs: 12, md: 6 }}>
-            <Stack spacing={2}>
-              <Chip label="Chip default" />
-              <Chip color="primary" label="Chip primary" />
-              <Chip color="secondary" label="Chip secondary" />
-              <Alert severity="success">This is a success alert</Alert>
-              <Alert severity="info">This is an info alert</Alert>
-              <Alert severity="warning">This is a warning alert</Alert>
-              <Alert severity="error">This is an error alert</Alert>
-              <Card variant="outlined">
-                <CardContent>
-                  <Typography variant="h5" gutterBottom>Card Title</Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    Card body text with secondary color using the theme.
-                  </Typography>
-                </CardContent>
-                <CardActions>
-                  <Button size="small">Action</Button>
-                  <Button size="small" color="secondary">Secondary</Button>
-                </CardActions>
-              </Card>
-            </Stack>
-          </Grid>
+            {/* Select correctamente asociado a su label */}
+            <FormControl>
+            <InputLabel id="role-label">Role</InputLabel>
+            <Select
+                labelId="role-label"  // asocia el label
+                id="role"             // id del control
+                name="role"           // nombre para formularios/autofill
+                label="Role"
+                defaultValue="dev"
+            >
+                <MenuItem value="dev">Developer</MenuItem>
+                <MenuItem value="designer">Designer</MenuItem>
+                <MenuItem value="pm">Product Manager</MenuItem>
+            </Select>
+            </FormControl>
+
+            {/* Checkbox / Switch con id + name (FormControlLabel ya asocia la etiqueta) */}
+            <FormControlLabel
+            control={<Checkbox id="newsletter" name="newsletter" defaultChecked />}
+            label="Subscribe to newsletter"
+            />
+            <FormControlLabel
+            control={<Switch id="dark-mode" name="darkMode" defaultChecked />}
+            label="Dark mode (mock)"
+            />
+
+            {/* Slider con etiqueta accesible */}
+            <Box sx={{ px: 1 }}>
+            <Typography id="proficiency-label" variant="body2" gutterBottom>
+                Proficiency
+            </Typography>
+            <Slider
+                name="proficiency"
+                defaultValue={70}
+                aria-labelledby="proficiency-label"  // asocia texto al control
+            />
+            </Box>
+        </Stack>
         </Grid>
-      </Box>
+
+        <Grid size={{ xs: 12, md: 6 }}>
+        <Stack spacing={2}>
+            <Chip label="Chip default" />
+            <Chip color="primary" label="Chip primary" />
+            <Chip color="secondary" label="Chip secondary" />
+            <Alert severity="success">This is a success alert</Alert>
+            <Alert severity="info">This is an info alert</Alert>
+            <Alert severity="warning">This is a warning alert</Alert>
+            <Alert severity="error">This is an error alert</Alert>
+            <Card variant="outlined">
+            <CardContent>
+                <Typography variant="h5" gutterBottom>Card Title</Typography>
+                <Typography variant="body2" color="text.secondary">
+                Card body text with secondary color using the theme.
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button size="small">Action</Button>
+                <Button size="small" color="secondary">Secondary</Button>
+            </CardActions>
+            </Card>
+        </Stack>
+        </Grid>
+    </Grid>
+    </Box>
     </Stack>
   );
 };
