@@ -1,20 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { AppBar, Toolbar, Container, Typography, Button, Box } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+
+const navItems = [
+  { to: '/', label: 'Home' },
+  { to: '/projects', label: 'Projects' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
+];
 
 const Header = () => {
-  const linkStyle = { marginRight: '1rem' };
   return (
-    <header style={{ padding: '1rem 0' }}>
-      <h1>Sebas Portfolio</h1>
-      <nav>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/projects" style={linkStyle}>Projects</Link>
-        <Link to="/about" style={linkStyle}>About</Link>
-        <Link to="/contact" style={linkStyle}>Contact</Link>
-      </nav>
-    </header>
+    <AppBar position="static" elevation={0}>
+      <Container maxWidth="lg">
+        <Toolbar disableGutters sx={{ gap: 2, py: 1 }}>
+          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+            Sebas Portfolio
+          </Typography>
+
+          <Box component="nav" sx={{ display: 'flex', gap: 1 }}>
+            {navItems.map((item) => (
+              <Button
+                key={item.to}
+                component={NavLink}
+                to={item.to}
+                sx={{
+                  '&.active': {
+                    borderBottom: '2px solid',
+                    borderColor: 'primary.contrastText',
+                    borderRadius: 0,
+                  },
+                }}
+                color="inherit"
+              >
+                {item.label}
+              </Button>
+            ))}
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 
 export default Header;
+
 
