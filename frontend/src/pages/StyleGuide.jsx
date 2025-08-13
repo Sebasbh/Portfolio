@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Box, Stack, Grid, Paper, Typography, Button, Divider, TextField,
+  Box, Stack, Paper, Typography, Button, Divider, TextField,
   Select, MenuItem, FormControl, InputLabel, Checkbox, FormControlLabel,
   Switch, Slider, Chip, Card, CardContent, CardActions, Alert
 } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { useTheme } from '@mui/material/styles';
 
 const Swatch = ({ title, color }) => (
@@ -48,7 +49,7 @@ const StyleGuide = () => {
         <Typography variant="h3" gutterBottom>Colors</Typography>
         <Grid container spacing={2}>
           {colors.map((c) => (
-            <Grid item xs={12} sm={6} md={4} lg={3} key={c.title}>
+            <Grid key={c.title} size={{ xs: 12, sm: 6, md: 4, lg: 3 }}>
               <Swatch title={c.title} color={c.value} />
             </Grid>
           ))}
@@ -103,7 +104,7 @@ const StyleGuide = () => {
       <Box>
         <Typography variant="h3" gutterBottom>Form Controls</Typography>
         <Grid container spacing={2}>
-          <Grid item xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6 }}>
             <Stack spacing={2}>
               <TextField label="Name" placeholder="John Doe" />
               <TextField label="Email" type="email" placeholder="john@mail.com" />
@@ -124,7 +125,8 @@ const StyleGuide = () => {
               </Box>
             </Stack>
           </Grid>
-          <Grid item xs={12} md={6}>
+
+          <Grid size={{ xs: 12, md: 6 }}>
             <Stack spacing={2}>
               <Chip label="Chip default" />
               <Chip color="primary" label="Chip primary" />
