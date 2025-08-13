@@ -14,7 +14,7 @@ const Header = () => {
     <AppBar position="static" elevation={0}>
       <Container maxWidth="lg">
         <Toolbar disableGutters sx={{ gap: 2, py: 1 }}>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
+          <Typography component="h1" variant="h6" sx={{ flexGrow: 1, fontWeight: 700 }}>
             Sebas Portfolio
           </Typography>
 
