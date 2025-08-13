@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div>Sebas Portfolio</div>
-  )
+    <>
+      <Header />
+      <main>
+        <p>Welcome to my portfolio</p>
+      </main>
+    </>
+  );
 }
 
-export default App
+export default App;
