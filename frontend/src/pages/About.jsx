@@ -2,7 +2,7 @@
 import React from 'react';
 import {
   Avatar, Box, Button, Paper, Stack, Typography,
-  List, ListItem, ListItemIcon, ListItemText, Divider,
+  List, ListItem, ListItemIcon, ListItemText, Divider, Chip, Card, CardContent,
 } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { useTheme, alpha } from '@mui/material/styles';
@@ -11,6 +11,52 @@ import DownloadIcon from '@mui/icons-material/Download';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
 import PublicIcon from '@mui/icons-material/Public';
+import CodeIcon from '@mui/icons-material/Code';
+import StorageIcon from '@mui/icons-material/Storage';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+
+const STATUS = { DONE: 'done', PLANNED: 'planned' };
+const FRONTEND = [
+  { label: 'React (CRA)', status: STATUS.DONE },
+  { label: 'React Router', status: STATUS.DONE },
+  { label: 'Material UI + theme (Navy & Gold)', status: STATUS.DONE },
+  { label: 'MUI Icons', status: STATUS.DONE },
+  { label: 'Google Fonts (Roboto)', status: STATUS.DONE },
+  { label: 'AppShell + pages', status: STATUS.DONE },
+  { label: 'A11y basics (labels)', status: STATUS.DONE },
+  { label: 'TanStack Query', status: STATUS.PLANNED },
+];
+const BACKEND = [
+  { label: 'Node.js + Express', status: STATUS.DONE },
+  { label: 'MongoDB', status: STATUS.DONE },
+  { label: 'Auth: JWT', status: STATUS.DONE },
+  { label: 'Email verification', status: STATUS.PLANNED },
+  { label: 'Socket.IO', status: STATUS.DONE },
+  { label: 'Stripe', status: STATUS.DONE },
+  { label: 'Multer + Cloudinary', status: STATUS.DONE },
+  { label: 'Cron jobs', status: STATUS.DONE },
+];
+const DEVOPS = [
+  { label: 'Docker', status: STATUS.DONE },
+  { label: 'GitHub Actions', status: STATUS.PLANNED },
+  { label: 'Vercel (FE/serverless)', status: STATUS.PLANNED },
+];
+
+const TechChip = ({ label, status }) => {
+  const isDone = status === STATUS.DONE;
+  return (
+    <Chip
+      size="small"
+      label={label}
+      icon={isDone ? <CheckCircleOutlineIcon sx={{ fontSize: 18 }} /> : <PendingOutlinedIcon sx={{ fontSize: 18 }} />}
+      variant={isDone ? 'soft' : 'outlined'}
+      color={isDone ? 'secondary' : 'default'}
+      sx={{ mr: 1, mb: 1 }}
+    />
+  );
+};
 
 const About = () => {
   const theme = useTheme();
@@ -31,6 +77,12 @@ const About = () => {
             <Typography id="about-title" variant="h2">About</Typography>
             <Typography color="text.secondary">Full-stack developer — clean UI, solid APIs, reliable delivery.</Typography>
           </Stack>
+        </Stack>
+
+        {/* Legend */}
+        <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 2 }}>
+          <Chip size="small" icon={<CheckCircleOutlineIcon sx={{ fontSize: 18 }} />} label="Done" variant="soft" color="secondary" />
+          <Chip size="small" icon={<PendingOutlinedIcon sx={{ fontSize: 18 }} />} label="Planned" variant="outlined" />
         </Stack>
 
         <Grid container spacing={3}>
@@ -70,8 +122,40 @@ const About = () => {
             </Stack>
           </Grid>
 
-          {/* RIGHT: (vacío por ahora) */}
-          <Grid size={{ xs: 12, md: 6 }} />
+          {/* RIGHT: Tech stacks */}
+          <Grid size={{ xs: 12, md: 6 }}>
+            <Stack spacing={2}>
+              <Paper variant="outlined" sx={{ p: 2 }}>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                  <CodeIcon color="secondary" />
+                  <Typography variant="h5">Frontend</Typography>
+                </Stack>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {FRONTEND.map((t) => <TechChip key={t.label} {...t} />)}
+                </Stack>
+              </Paper>
+
+              <Paper variant="outlined" sx={{ p: 2 }}>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                  <StorageIcon color="secondary" />
+                  <Typography variant="h5">Backend</Typography>
+                </Stack>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {BACKEND.map((t) => <TechChip key={t.label} {...t} />)}
+                </Stack>
+              </Paper>
+
+              <Paper variant="outlined" sx={{ p: 2 }}>
+                <Stack direction="row" spacing={1} alignItems="center" sx={{ mb: 1 }}>
+                  <CloudDoneIcon color="secondary" />
+                  <Typography variant="h5">DevOps / Delivery</Typography>
+                </Stack>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {DEVOPS.map((t) => <TechChip key={t.label} {...t} />)}
+                </Stack>
+              </Paper>
+            </Stack>
+          </Grid>
         </Grid>
       </Paper>
     </Box>
@@ -79,4 +163,3 @@ const About = () => {
 };
 
 export default About;
-
