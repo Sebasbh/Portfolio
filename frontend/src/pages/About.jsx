@@ -22,6 +22,7 @@ import ApiIcon from '@mui/icons-material/Api';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import BoltIcon from '@mui/icons-material/Bolt';
 import InsightsIcon from '@mui/icons-material/Insights';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
 
 const STATUS = { DONE: 'done', PLANNED: 'planned' };
 const FRONTEND = [
@@ -61,6 +62,15 @@ const STATS = [
   { label: 'Projects shipped', value: '10+', icon: InsightsIcon },
   { label: 'MERN + DevOps', value: 'End-to-end', icon: VerifiedUserIcon },
 ];
+
+const VALUES = [
+  'Clarity over complexity',
+  'Accessible by default',
+  'Performance-first',
+  'Security-aware',
+  'Automated & tested',
+];
+const TOOLING = ['ESLint', 'Prettier', 'React Hook Form', 'Yup', 'Helmet', 'GitHub Actions', 'Docker'];
 
 const StatCard = ({ label, value, icon: Icon }) => (
   <Paper variant="outlined" sx={{ p: 2, height: '100%' }} role="group" aria-label={label}>
@@ -176,6 +186,32 @@ const About = () => {
                 </List>
               </Paper>
 
+              <Stack spacing={1.5}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  <BuildCircleIcon color="secondary" />
+                  <Typography variant="h5">Core values</Typography>
+                </Stack>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {VALUES.map((v) => (
+                    <Chip
+                      key={v}
+                      icon={<CheckCircleOutlineIcon sx={{ fontSize: 18 }} />}
+                      label={v}
+                      size="small"
+                      variant="outlined"
+                    />
+                  ))}
+                </Stack>
+              </Stack>
+
+              <Stack spacing={1.5}>
+                <Typography variant="overline">Tooling I use</Typography>
+                <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
+                  {TOOLING.map((t) => (
+                    <Chip key={t} label={t} size="small" variant="outlined" />
+                  ))}
+                </Stack>
+              </Stack>
               {/* CTA */}
               <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
                 <Button component={RouterLink} to="/projects" variant="contained" color="primary">See my projects</Button>
