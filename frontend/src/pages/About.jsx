@@ -1,31 +1,54 @@
 // frontend/src/pages/About.jsx
 import React from 'react';
-import {
-  Avatar, Box, Button, Paper, Stack, Typography,
-  List, ListItem, ListItemIcon, ListItemText, Divider, Chip, Card, CardContent,
-} from '@mui/material';
-import Grid from '@mui/material/Grid';
-import { useTheme, alpha } from '@mui/material/styles';
-import { Link as RouterLink } from 'react-router-dom';
-import DownloadIcon from '@mui/icons-material/Download';
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
-import PublicIcon from '@mui/icons-material/Public';
-import CodeIcon from '@mui/icons-material/Code';
-import StorageIcon from '@mui/icons-material/Storage';
-import CloudDoneIcon from '@mui/icons-material/CloudDone';
-import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
-import PaymentIcon from '@mui/icons-material/Payment';
-import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
-import ApiIcon from '@mui/icons-material/Api';
-import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
-import BoltIcon from '@mui/icons-material/Bolt';
-import InsightsIcon from '@mui/icons-material/Insights';
-import BuildCircleIcon from '@mui/icons-material/BuildCircle';
-import { LinearProgress } from '@mui/material';
 
+// MUI - componentes
+import {
+  Avatar,
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Chip,
+  LinearProgress,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
+// MUI - layout (Grid v2)
+import Grid from '@mui/material/Grid';
+// MUI - estilos
+import { alpha, useTheme } from '@mui/material/styles';
+
+// Routing
+import { Link as RouterLink } from 'react-router-dom';
+
+// Icons
+import ApiIcon from '@mui/icons-material/Api';
+import BoltIcon from '@mui/icons-material/Bolt';
+import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import CodeIcon from '@mui/icons-material/Code';
+import DownloadIcon from '@mui/icons-material/Download';
+import InsightsIcon from '@mui/icons-material/Insights';
+import PaymentIcon from '@mui/icons-material/Payment';
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import PublicIcon from '@mui/icons-material/Public';
+import StorageIcon from '@mui/icons-material/Storage';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import WorkOutlineIcon from '@mui/icons-material/WorkOutline';
+
+// ==============================
+// Datos / constantes
+// ==============================
 const STATUS = { DONE: 'done', PLANNED: 'planned' };
+
 const FRONTEND = [
   { label: 'React (CRA)', status: STATUS.DONE },
   { label: 'React Router', status: STATUS.DONE },
@@ -36,6 +59,7 @@ const FRONTEND = [
   { label: 'A11y basics (labels)', status: STATUS.DONE },
   { label: 'TanStack Query', status: STATUS.PLANNED },
 ];
+
 const BACKEND = [
   { label: 'Node.js + Express', status: STATUS.DONE },
   { label: 'MongoDB', status: STATUS.DONE },
@@ -46,6 +70,7 @@ const BACKEND = [
   { label: 'Multer + Cloudinary', status: STATUS.DONE },
   { label: 'Cron jobs', status: STATUS.DONE },
 ];
+
 const DEVOPS = [
   { label: 'Docker', status: STATUS.DONE },
   { label: 'GitHub Actions', status: STATUS.PLANNED },
@@ -71,8 +96,12 @@ const VALUES = [
   'Security-aware',
   'Automated & tested',
 ];
+
 const TOOLING = ['ESLint', 'Prettier', 'React Hook Form', 'Yup', 'Helmet', 'GitHub Actions', 'Docker'];
 
+// ==============================
+// UI pequeña reutilizable
+// ==============================
 const StatCard = ({ label, value, icon: Icon }) => (
   <Paper variant="outlined" sx={{ p: 2, height: '100%' }} role="group" aria-label={label}>
     <Stack direction="row" spacing={1.5} alignItems="center">
@@ -125,33 +154,63 @@ const SkillBar = ({ label, value }) => (
     <LinearProgress variant="determinate" value={value} />
   </Stack>
 );
+
+// ==============================
+// Página
+// ==============================
 const About = () => {
   const theme = useTheme();
 
   return (
     <Box component="section" aria-labelledby="about-title" sx={{ py: { xs: 1, md: 2 } }}>
-      <Paper variant="outlined" sx={{
-        p: { xs: 3, md: 4 }, borderRadius: theme.shape.borderRadius, position: 'relative',
-        overflow: 'hidden', bgcolor: 'background.paper',
-        '&::before': { content: '""', position: 'absolute', inset: 0, pointerEvents: 'none',
-          background: `linear-gradient(135deg, ${alpha(theme.palette.primary.main, 0.03)} 0%, ${alpha(theme.palette.secondary.main, 0.05)} 100%)` },
-      }}>
+      <Paper
+        variant="outlined"
+        sx={{
+          p: { xs: 3, md: 4 },
+          borderRadius: theme.shape.borderRadius,
+          position: 'relative',
+          overflow: 'hidden',
+          bgcolor: 'background.paper',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            background: `linear-gradient(
+              135deg,
+              ${alpha(theme.palette.primary.main, 0.03)} 0%,
+              ${alpha(theme.palette.secondary.main, 0.05)} 100%
+            )`,
+          },
+        }}
+      >
         {/* Header */}
         <Stack direction="row" spacing={2} alignItems="center" sx={{ mb: 2 }}>
-          <Avatar sx={{ width: 64, height: 64, fontWeight: 700,
-            bgcolor: alpha(theme.palette.secondary.main, 0.2), color: theme.palette.secondary.dark }} aria-hidden>SB</Avatar>
+          <Avatar
+            sx={{
+              width: 64,
+              height: 64,
+              fontWeight: 700,
+              bgcolor: alpha(theme.palette.secondary.main, 0.2),
+              color: theme.palette.secondary.dark,
+            }}
+            aria-hidden
+          >
+            SB
+          </Avatar>
           <Stack spacing={0.5}>
             <Typography id="about-title" variant="h2">About</Typography>
             <Typography color="text.secondary">Full-stack developer — clean UI, solid APIs, reliable delivery.</Typography>
           </Stack>
         </Stack>
 
-        {/* Legend */}
+        {/* Leyenda Done/Planned */}
         <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap" sx={{ mb: 2 }}>
           <Chip size="small" icon={<CheckCircleOutlineIcon sx={{ fontSize: 18 }} />} label="Done" variant="soft" color="secondary" />
           <Chip size="small" icon={<PendingOutlinedIcon sx={{ fontSize: 18 }} />} label="Planned" variant="outlined" />
         </Stack>
 
+        {/* Highlights */}
         <Grid container spacing={2} sx={{ mb: 2 }}>
           {HIGHLIGHTS.map((h, i) => (
             <Grid key={i} size={{ xs: 12, md: 4 }}>
@@ -161,7 +220,7 @@ const About = () => {
         </Grid>
 
         <Grid container spacing={3}>
-          {/* LEFT: Intro + Quick facts */}
+          {/* LEFT */}
           <Grid size={{ xs: 12, md: 6 }}>
             <Stack spacing={2}>
               <Typography color="text.secondary" sx={{ maxWidth: 72 * 10 }}>
@@ -170,6 +229,7 @@ const About = () => {
                 integrate auth & payments, and ship with Docker and CI/CD.
               </Typography>
 
+              {/* Stats */}
               <Grid container spacing={2} sx={{ mb: 2 }}>
                 {STATS.map((s, i) => (
                   <Grid key={i} size={{ xs: 12, sm: 4 }}>
@@ -178,24 +238,32 @@ const About = () => {
                 ))}
               </Grid>
 
+              {/* Quick facts */}
               <Paper variant="outlined" sx={{ p: 2 }}>
                 <Typography variant="overline">Quick facts</Typography>
                 <List dense sx={{ py: 0 }}>
                   <ListItem disableGutters>
-                    <ListItemIcon sx={{ minWidth: 28 }}><PersonOutlineIcon fontSize="small" color="secondary" /></ListItemIcon>
+                    <ListItemIcon sx={{ minWidth: 28 }}>
+                      <PersonOutlineIcon fontSize="small" color="secondary" />
+                    </ListItemIcon>
                     <ListItemText primary="Full-Stack Developer (MERN)" />
                   </ListItem>
                   <ListItem disableGutters>
-                    <ListItemIcon sx={{ minWidth: 28 }}><WorkOutlineIcon fontSize="small" color="secondary" /></ListItemIcon>
+                    <ListItemIcon sx={{ minWidth: 28 }}>
+                      <WorkOutlineIcon fontSize="small" color="secondary" />
+                    </ListItemIcon>
                     <ListItemText primary="Open to full-time & freelance" />
                   </ListItem>
                   <ListItem disableGutters>
-                    <ListItemIcon sx={{ minWidth: 28 }}><PublicIcon fontSize="small" color="secondary" /></ListItemIcon>
+                    <ListItemIcon sx={{ minWidth: 28 }}>
+                      <PublicIcon fontSize="small" color="secondary" />
+                    </ListItemIcon>
                     <ListItemText primary="Remote-friendly (EU timezone)" />
                   </ListItem>
                 </List>
               </Paper>
 
+              {/* Valores */}
               <Stack spacing={1.5}>
                 <Stack direction="row" spacing={1} alignItems="center">
                   <BuildCircleIcon color="secondary" />
@@ -214,6 +282,7 @@ const About = () => {
                 </Stack>
               </Stack>
 
+              {/* Tooling */}
               <Stack spacing={1.5}>
                 <Typography variant="overline">Tooling I use</Typography>
                 <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
@@ -223,6 +292,7 @@ const About = () => {
                 </Stack>
               </Stack>
 
+              {/* Skill map */}
               <Paper variant="outlined" sx={{ p: 2 }}>
                 <Typography variant="overline">Skill map</Typography>
                 <Stack spacing={1.2} sx={{ mt: 1 }}>
@@ -231,16 +301,30 @@ const About = () => {
                   <SkillBar label="DevOps (Docker + CI/CD)" value={75} />
                 </Stack>
               </Paper>
+
               {/* CTA */}
               <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
-                <Button component={RouterLink} to="/projects" variant="contained" color="primary">See my projects</Button>
-                <Button component={RouterLink} to="/contact" variant="outlined" color="secondary">Get in touch</Button>
-                <Button component="a" href="/cv.pdf" target="_blank" rel="noopener noreferrer" variant="text" startIcon={<DownloadIcon />}>Download CV</Button>
+                <Button component={RouterLink} to="/projects" variant="contained" color="primary">
+                  See my projects
+                </Button>
+                <Button component={RouterLink} to="/contact" variant="outlined" color="secondary">
+                  Get in touch
+                </Button>
+                <Button
+                  component="a"
+                  href="/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  variant="text"
+                  startIcon={<DownloadIcon />}
+                >
+                  Download CV
+                </Button>
               </Stack>
             </Stack>
           </Grid>
 
-          {/* RIGHT: Tech stacks */}
+          {/* RIGHT */}
           <Grid size={{ xs: 12, md: 6 }}>
             <Stack spacing={2}>
               <Paper variant="outlined" sx={{ p: 2 }}>
@@ -249,7 +333,9 @@ const About = () => {
                   <Typography variant="h5">Frontend</Typography>
                 </Stack>
                 <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                  {FRONTEND.map((t) => <TechChip key={t.label} {...t} />)}
+                  {FRONTEND.map((t) => (
+                    <TechChip key={t.label} {...t} />
+                  ))}
                 </Stack>
               </Paper>
 
@@ -259,7 +345,9 @@ const About = () => {
                   <Typography variant="h5">Backend</Typography>
                 </Stack>
                 <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                  {BACKEND.map((t) => <TechChip key={t.label} {...t} />)}
+                  {BACKEND.map((t) => (
+                    <TechChip key={t.label} {...t} />
+                  ))}
                 </Stack>
               </Paper>
 
@@ -269,7 +357,9 @@ const About = () => {
                   <Typography variant="h5">DevOps / Delivery</Typography>
                 </Stack>
                 <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
-                  {DEVOPS.map((t) => <TechChip key={t.label} {...t} />)}
+                  {DEVOPS.map((t) => (
+                    <TechChip key={t.label} {...t} />
+                  ))}
                 </Stack>
               </Paper>
             </Stack>
