@@ -16,6 +16,10 @@ import StorageIcon from '@mui/icons-material/Storage';
 import CloudDoneIcon from '@mui/icons-material/CloudDone';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
+import PaymentIcon from '@mui/icons-material/Payment';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import ApiIcon from '@mui/icons-material/Api';
+
 
 const STATUS = { DONE: 'done', PLANNED: 'planned' };
 const FRONTEND = [
@@ -43,6 +47,29 @@ const DEVOPS = [
   { label: 'GitHub Actions', status: STATUS.PLANNED },
   { label: 'Vercel (FE/serverless)', status: STATUS.PLANNED },
 ];
+
+const HIGHLIGHTS = [
+  { title: 'Auth & Payments', desc: 'JWT auth, roles and Stripe (checkout & webhooks).', to: '/projects', icon: PaymentIcon },
+  { title: 'Realtime UX', desc: 'Socket.IO chats, presence and optimistic UI.', to: '/projects', icon: ChatBubbleOutlineIcon },
+  { title: 'APIs & Dashboards', desc: 'REST APIs, analytics and admin dashboards.', to: '/projects', icon: ApiIcon },
+];
+
+const HighlightCard = ({ title, desc, to, icon: Icon }) => (
+  <Card variant="outlined" sx={{ height: '100%' }}>
+    <CardContent>
+      <Stack spacing={1}>
+        <Stack direction="row" spacing={1} alignItems="center">
+          {Icon && <Icon color="secondary" />}
+          <Typography variant="h6">{title}</Typography>
+        </Stack>
+        <Typography variant="body2" color="text.secondary">{desc}</Typography>
+        <Button component={RouterLink} to={to} size="small" color="secondary" sx={{ alignSelf: 'flex-start' }}>
+          View projects
+        </Button>
+      </Stack>
+    </CardContent>
+  </Card>
+);
 
 const TechChip = ({ label, status }) => {
   const isDone = status === STATUS.DONE;
@@ -84,6 +111,14 @@ const About = () => {
           <Chip size="small" icon={<CheckCircleOutlineIcon sx={{ fontSize: 18 }} />} label="Done" variant="soft" color="secondary" />
           <Chip size="small" icon={<PendingOutlinedIcon sx={{ fontSize: 18 }} />} label="Planned" variant="outlined" />
         </Stack>
+
+        <Grid container spacing={2} sx={{ mb: 2 }}>
+          {HIGHLIGHTS.map((h, i) => (
+            <Grid key={i} size={{ xs: 12, md: 4 }}>
+              <HighlightCard {...h} />
+            </Grid>
+          ))}
+        </Grid>
 
         <Grid container spacing={3}>
           {/* LEFT: Intro + Quick facts */}
@@ -162,4 +197,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default A
