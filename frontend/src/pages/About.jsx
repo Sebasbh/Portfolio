@@ -19,7 +19,9 @@ import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined';
 import PaymentIcon from '@mui/icons-material/Payment';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import ApiIcon from '@mui/icons-material/Api';
-
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
+import BoltIcon from '@mui/icons-material/Bolt';
+import InsightsIcon from '@mui/icons-material/Insights';
 
 const STATUS = { DONE: 'done', PLANNED: 'planned' };
 const FRONTEND = [
@@ -53,6 +55,24 @@ const HIGHLIGHTS = [
   { title: 'Realtime UX', desc: 'Socket.IO chats, presence and optimistic UI.', to: '/projects', icon: ChatBubbleOutlineIcon },
   { title: 'APIs & Dashboards', desc: 'REST APIs, analytics and admin dashboards.', to: '/projects', icon: ApiIcon },
 ];
+
+const STATS = [
+  { label: 'Years coding', value: '3+', icon: BoltIcon },
+  { label: 'Projects shipped', value: '10+', icon: InsightsIcon },
+  { label: 'MERN + DevOps', value: 'End-to-end', icon: VerifiedUserIcon },
+];
+
+const StatCard = ({ label, value, icon: Icon }) => (
+  <Paper variant="outlined" sx={{ p: 2, height: '100%' }} role="group" aria-label={label}>
+    <Stack direction="row" spacing={1.5} alignItems="center">
+      {Icon && <Icon color="secondary" />}
+      <Stack>
+        <Typography variant="h5" sx={{ lineHeight: 1 }}>{value}</Typography>
+        <Typography variant="caption" color="text.secondary">{label}</Typography>
+      </Stack>
+    </Stack>
+  </Paper>
+);
 
 const HighlightCard = ({ title, desc, to, icon: Icon }) => (
   <Card variant="outlined" sx={{ height: '100%' }}>
@@ -130,6 +150,14 @@ const About = () => {
                 integrate auth & payments, and ship with Docker and CI/CD.
               </Typography>
 
+              <Grid container spacing={2} sx={{ mb: 2 }}>
+                {STATS.map((s, i) => (
+                  <Grid key={i} size={{ xs: 12, sm: 4 }}>
+                    <StatCard {...s} />
+                  </Grid>
+                ))}
+              </Grid>
+
               <Paper variant="outlined" sx={{ p: 2 }}>
                 <Typography variant="overline">Quick facts</Typography>
                 <List dense sx={{ py: 0 }}>
@@ -197,4 +225,4 @@ const About = () => {
   );
 };
 
-export default A
+export default About;
