@@ -23,6 +23,7 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import BoltIcon from '@mui/icons-material/Bolt';
 import InsightsIcon from '@mui/icons-material/Insights';
 import BuildCircleIcon from '@mui/icons-material/BuildCircle';
+import { LinearProgress } from '@mui/material';
 
 const STATUS = { DONE: 'done', PLANNED: 'planned' };
 const FRONTEND = [
@@ -115,6 +116,15 @@ const TechChip = ({ label, status }) => {
   );
 };
 
+const SkillBar = ({ label, value }) => (
+  <Stack spacing={0.5}>
+    <Stack direction="row" justifyContent="space-between">
+      <Typography variant="caption" color="text.secondary">{label}</Typography>
+      <Typography variant="caption" color="text.secondary">{value}%</Typography>
+    </Stack>
+    <LinearProgress variant="determinate" value={value} />
+  </Stack>
+);
 const About = () => {
   const theme = useTheme();
 
@@ -212,6 +222,15 @@ const About = () => {
                   ))}
                 </Stack>
               </Stack>
+
+              <Paper variant="outlined" sx={{ p: 2 }}>
+                <Typography variant="overline">Skill map</Typography>
+                <Stack spacing={1.2} sx={{ mt: 1 }}>
+                  <SkillBar label="Frontend (React + MUI)" value={85} />
+                  <SkillBar label="Backend (Node + Express + MongoDB)" value={80} />
+                  <SkillBar label="DevOps (Docker + CI/CD)" value={75} />
+                </Stack>
+              </Paper>
               {/* CTA */}
               <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap">
                 <Button component={RouterLink} to="/projects" variant="contained" color="primary">See my projects</Button>
